@@ -1,17 +1,17 @@
 package com.example.service;
 
-import com.example.entity.BlogModel;
+import com.example.entity.BlogPostModel;
 
 import java.util.List;
 
 public interface BlogService {
-    List<BlogModel> getAllBlog();
+    List<BlogPostModel> getAllBlog();
 
-    List<BlogModel> getBlogByUserId(int userId);
+    List<BlogPostModel> getBlogByUserId(int userId);
 
-    void addBlogInfo(BlogModel blogModel);
+    void addBlogInfo(BlogPostModel blogPostModel);
 
     void deleteBlog(int blogId);
 
-    void updateBlogPost(BlogModel blogModel,int id);
+    void updateBlogPost(BlogPostModel blogPostModel, int id);
 }

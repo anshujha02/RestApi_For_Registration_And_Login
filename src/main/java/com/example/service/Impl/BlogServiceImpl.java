@@ -1,6 +1,6 @@
 package com.example.service.Impl;
 
-import com.example.entity.BlogModel;
+import com.example.entity.BlogPostModel;
 import com.example.repository.BlogRepository;
 import com.example.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,21 +14,21 @@ public class BlogServiceImpl implements BlogService {
     @Autowired
     private BlogRepository blogRepository;
     @Override
-    public List<BlogModel> getAllBlog() {
-        List<BlogModel> blogDTOS =  blogRepository.findAll() ;
+    public List<BlogPostModel> getAllBlog() {
+        List<BlogPostModel> blogDTOS =  blogRepository.findAll() ;
         return blogDTOS;
     }
 
     @Override
-    public List<BlogModel> getBlogByUserId(int userId) {
-        List<BlogModel> blogModels = blogRepository.findByUserId(userId);
+    public List<BlogPostModel> getBlogByUserId(int userId) {
+        List<BlogPostModel> blogPostModels = blogRepository.findByUserId(userId);
 
-        return blogModels;
+        return blogPostModels;
     }
 
     @Override
-    public void addBlogInfo(BlogModel blogModel) {
-        blogRepository.save(blogModel);
+    public void addBlogInfo(BlogPostModel blogPostModel) {
+        blogRepository.save(blogPostModel);
     }
 
     @Override
@@ -37,11 +37,11 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public void updateBlogPost(BlogModel blogModel, int id) {
-        BlogModel existingBlog = blogRepository.findById(id).orElseThrow(()-> new RuntimeException() );
-        existingBlog.setId(blogModel.getId());
-        existingBlog.setText(blogModel.getText());
-        existingBlog.setUserId(blogModel.getUserId());
+    public void updateBlogPost(BlogPostModel blogPostModel, int id) {
+        BlogPostModel existingBlog = blogRepository.findById(id).orElseThrow(()-> new RuntimeException() );
+        existingBlog.setTitle(blogPostModel.getTitle());
+        existingBlog.setContent(blogPostModel.getContent());
+        existingBlog.setTag(blogPostModel.getTag());
         blogRepository.save(existingBlog);
     }
 
