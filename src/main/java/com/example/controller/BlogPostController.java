@@ -4,6 +4,7 @@ import com.example.entity.BlogPostModel;
 import com.example.entity.CommentModel;
 import com.example.service.BlogService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class BlogPostController {
     private final BlogService blogService;
 
     @GetMapping("/all")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     public List<BlogPostModel> getAllBlogs(){
         try{
             return blogService.getAllBlog() ;
@@ -44,6 +46,7 @@ public class BlogPostController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String addBlog(@RequestBody BlogPostModel blogPostModel){
         try{
             blogService.addBlogInfo(blogPostModel);
@@ -54,6 +57,7 @@ public class BlogPostController {
     }
 
     @PutMapping("/update")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String updateBlogPost(@RequestBody BlogPostModel blogPostModel,@RequestParam("id") int id){
         try{
             blogService.updateBlogPost(blogPostModel, id);
